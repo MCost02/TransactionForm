@@ -1,9 +1,11 @@
+/* Menu Bar Function - Currently hidden
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu("💰 Tracker")
     .addItem("➕ New Transaction", "openTransactionForm")
     .addToUi();
 }
+*/
 
 function openTransactionForm() {
   const html = HtmlService.createHtmlOutputFromFile("TransactionForm")
