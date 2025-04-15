@@ -20,5 +20,5 @@ function saveSavingsTransaction(date, type, amount, notes) {
   sheet.getRange(nextRow, 1).setValue(new Date(date));
   sheet.getRange(nextRow, 2).setValue(type);
   sheet.getRange(nextRow, 3).setValue(Number(amount));
-  sheet.getRange(nextRow, 6).setValue(notes);
+  sheet.getRange(nextRow, 5).setValue(notes);
 }

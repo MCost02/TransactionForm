@@ -29,7 +29,7 @@
     </style>
   </head>
   <body>
-    <h2>➕ New Transaction</h2>
+    <h2 style="text-align:center">New Transaction</h2>
 
     <label for="date">🗓️ Date</label>
     <input type="date" id="date" required>
@@ -45,9 +45,12 @@
     <input type="number" id="amount" step="0.01" min="0" required>
 
     <label for="notes">📝 Notes</label>
-    <textarea id="notes" rows="3" placeholder="Optional notes..."></textarea>
+    <textarea id="notes" rows="3" placeholder="Optional"></textarea>
 
-    <button onclick="submitTransaction()">Save</button>
+    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 16px;">
+      <button onclick="google.script.host.close()" style="background-color: #e53935; color: white;">Cancel</button>
+      <button onclick="submitTransaction()">Save</button>
+    </div>
 
     <script>
       function submitTransaction() {
