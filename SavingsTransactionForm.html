@@ -63,7 +63,7 @@
 
         google.script.run
           .withSuccessHandler(() => google.script.host.close())
-          .saveTransaction(date, type, amount, notes);
+          .saveSavingsTransaction(date, type, amount, notes);
       }
     </script>
   </body>

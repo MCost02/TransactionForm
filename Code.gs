@@ -2,18 +2,18 @@
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu("💰 Tracker")
-    .addItem("➕ New Transaction", "openTransactionForm")
+    .addItem("➕ New Savings Transaction", "openSavingsTransactionForm")
     .addToUi();
 }
 */
 
-function openTransactionForm() {
-  const html = HtmlService.createHtmlOutputFromFile("TransactionForm")
+function openSavingsTransactionForm() {
+  const html = HtmlService.createHtmlOutputFromFile("SavingsTransactionForm")
     .setTitle("New Transaction");
   SpreadsheetApp.getUi().showSidebar(html);
 }
 
-function saveTransaction(date, type, amount, notes) {
+function saveSavingsTransaction(date, type, amount, notes) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Savings");
   const nextRow = sheet.getLastRow() + 1;
 
