@@ -1,73 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <base target="_top">
-    <style>
-      body { font-family: Arial, sans-serif; padding: 10px; width: 250px; }
-      label { font-weight: bold; display: block; margin-top: 12px; }
-      input, select, textarea {
-        width: 100%;
-        margin-top: 4px;
-        padding: 6px;
-        box-sizing: border-box;
-        border-radius: 4px;
-        border: 1px solid #ccc;
+<head>
+  <base target="_top">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 10px; width: 250px; }
+    label { font-weight: bold; display: block; margin-top: 12px; }
+    input, select, textarea {
+      width: 100%;
+      margin-top: 4px;
+      padding: 6px; 
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 16px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center">New Transaction</h2>
+
+  <label for="date">🗓️ Date</label>
+  <input type="date" id="date" required>
+
+  <label for="type">↕️ Type</label>
+  <select id="type">
+    <option value="Deposit">Deposit</option>
+    <option value="Withdrawal">Withdrawal</option>
+    <option value="Interest">Interest</option>
+  </select>
+
+  <label for="amount">💵 Amount</label>
+  <input type="number" id="amount" step="0.01" min="0" required>
+
+  <label for="notes">📝 Notes</label>
+  <textarea id="notes" rows="3" placeholder="Optional"></textarea>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-top: 16px;">
+    <button onclick="google.script.host.close()" style="background-color: #e53935; color: white;">Cancel</button>
+    <button onclick="submitTransaction()">Save</button>
+  </div>
+
+  <script>
+    function submitTransaction() {
+      const date = document.getElementById("date").value;
+      const type = document.getElementById("type").value;
+      const amount = document.getElementById("amount").value;
+      const notes = document.getElementById("notes").value;
+
+      if (!date || !amount) {
+        alert("Date and amount are required.");
+        return;
       }
-      button {
-        margin-top: 16px;
-        background-color: #4CAF50;
-        color: white;
-        padding: 8px 12px;
-        border: none;
-        cursor: pointer;
-        border-radius: 4px;
-        font-size: 14px;
-      }
-      button:hover {
-        background-color: #45a049;
-      }
-    </style>
-  </head>
-  <body>
-    <h2 style="text-align:center">New Transaction</h2>
 
-    <label for="date">🗓️ Date</label>
-    <input type="date" id="date" required>
-
-    <label for="type">↕️ Type</label>
-    <select id="type">
-      <option value="Deposit">Deposit</option>
-      <option value="Withdrawal">Withdrawal</option>
-      <option value="Interest">Interest</option>
-    </select>
-
-    <label for="amount">💵 Amount</label>
-    <input type="number" id="amount" step="0.01" min="0" required>
-
-    <label for="notes">📝 Notes</label>
-    <textarea id="notes" rows="3" placeholder="Optional"></textarea>
-
-    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 16px;">
-      <button onclick="google.script.host.close()" style="background-color: #e53935; color: white;">Cancel</button>
-      <button onclick="submitTransaction()">Save</button>
-    </div>
-
-    <script>
-      function submitTransaction() {
-        const date = document.getElementById("date").value;
-        const type = document.getElementById("type").value;
-        const amount = document.getElementById("amount").value;
-        const notes = document.getElementById("notes").value;
-
-        if (!date || !amount) {
-          alert("Date and amount are required.");
-          return;
-        }
-
-        google.script.run
-          .withSuccessHandler(() => google.script.host.close())
-          .saveSavingsTransaction(date, type, amount, notes);
-      }
-    </script>
-  </body>
+      google.script.run
+        .withSuccessHandler(() => google.script.host.close())
+        .saveSavingsTransaction(date, type, amount, notes);
+    }
+  </script>
+</body>
 </html>
