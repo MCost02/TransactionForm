@@ -8,39 +8,41 @@
 </head>
 
 <body>
-  <h2 style="text-align:center">New Transaction</h2>
+  <div style="font-size: 0.9em; max-width: 500px; margin: auto;">
+    <h2 style="text-align:center; padding-top: 0px; margin-top:4px">New Transaction</h2>
 
-  <label for="symbol">Symbol</label>
-  <input type="text" id="symbol" required>
+    <label for="symbol">💱 Symbol</label>
+    <input type="text" id="symbol" required>
 
-  <label for="strikePrice">Strike Price</label>
-  <input type="number" id="strikePrice" step="0.01" min="0" required>
+    <label for="strikePrice">🎯 Strike Price</label>
+    <input type="number" id="strikePrice" step="0.01" min="0" required>
 
-  <label for="putCall">Put/Call</label>
-  <select id="putCall" required>
+    <label for="putCall">↕️ Put/Call</label>
+    <select id="putCall" required>
     <option value="" disabled selected>Select</option>
     <option value="Put">Put</option>
     <option value="Call">Call</option>
   </select>
 
-  <label for="expiration">Expiration</label>
-  <input type="date" id="expiration" required>
+    <label for="expiration">⏳ Expiration</label>
+    <input type="date" id="expiration" required>
 
-  <label for="buyDate">Buy Date</label>
-  <input type="date" id="buyDate" required>
+    <label for="buyDate">🗓️ Buy Date</label>
+    <input type="date" id="buyDate" required>
 
-  <label for="buyPrice">Buy Price</label>
-  <input type="number" id="buyPrice" step="0.01" min="0" required>
+    <label for="buyPrice">💵 Buy Price</label>
+    <input type="number" id="buyPrice" step="0.01" min="0" required>
 
-  <label for="sellDate">Sell Date</label>
-  <input type="date" id="sellDate">
+    <label for="sellDate">🗓️ Sell Date</label>
+    <input type="date" id="sellDate">
 
-  <label for="sellPrice">Sell Price</label>
-  <input type="number" id="sellPrice" step="0.01" min="0">
+    <label for="sellPrice">💵 Sell Price</label>
+    <input type="number" id="sellPrice" step="0.01" min="0">
 
-  <div style="display: flex; justify-content: center; gap: 10px; margin-top: 16px;">
-    <button onclick="cancelTransaction()" style="background-color: #e53935; color: white;">Cancel</button>
-    <button onclick="submitTransaction()">Save</button>
+    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 4px;">
+      <button onclick="cancelTransaction()" style="background-color: #e53935; color: white;">Cancel</button>
+      <button onclick="submitTransaction()">Save</button>
+    </div>
   </div>
 
   <script>
