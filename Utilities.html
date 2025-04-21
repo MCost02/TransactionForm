@@ -1,0 +1,15 @@
+
+<script>
+  <!-- Loops through each item in the array, checks if the input matching that id is empty, and returns a list of missing labels -->  
+  function getMissingFields(fields) {
+    return fields
+      .filter(field => !document.getElementById(field.id).value)
+      .map(field => field.label);
+  }
+
+  function showMessageAndClose(message) {
+    const body = document.body;
+    body.innerHTML = `<p style="text-align:center; font-weight:bold; font-size:16px;">${message}</p>`;
+    setTimeout(() => google.script.host.close(), 1000);
+  }
+</script>

@@ -3,35 +3,37 @@
 
 <head>
   <base target="_top">
-  <?!= include("Styles") ?>
   <!-- Calls include function to import CSS from Styles.html -->
+  <?!= include("Styles") ?>
+  <!-- Calls include function to import scripts from Utilities.html -->
+  <?!= include("Utilities") ?>
 </head>
 
 <body>
   <div style="font-size: 0.9em; max-width: 500px; margin: auto;">
-    <h2 style="text-align:center; padding-top: 0px; margin-top:4px">New Transaction</h2>
+    <h2 style="text-align:center; padding-top: 0px; margin-top:3px">New Transaction</h2>
 
     <label for="symbol">💱 Symbol</label>
-    <input type="text" id="symbol" required>
+    <input type="text" id="symbol">
 
     <label for="strikePrice">🎯 Strike Price</label>
-    <input type="number" id="strikePrice" step="0.01" min="0" required>
+    <input type="number" id="strikePrice" step="0.01" min="0">
 
     <label for="putCall">↕️ Put/Call</label>
-    <select id="putCall" required>
+    <select id="putCall">
     <option value="" disabled selected>Select</option>
     <option value="Put">Put</option>
     <option value="Call">Call</option>
   </select>
 
     <label for="expiration">⏳ Expiration</label>
-    <input type="date" id="expiration" required>
+    <input type="date" id="expiration">
 
     <label for="buyDate">🗓️ Buy Date</label>
-    <input type="date" id="buyDate" required>
+    <input type="date" id="buyDate">
 
     <label for="buyPrice">💵 Buy Price</label>
-    <input type="number" id="buyPrice" step="0.01" min="0" required>
+    <input type="number" id="buyPrice" step="0.01" min="0">
 
     <label for="sellDate">🗓️ Sell Date</label>
     <input type="date" id="sellDate">
@@ -39,20 +41,29 @@
     <label for="sellPrice">💵 Sell Price</label>
     <input type="number" id="sellPrice" step="0.01" min="0">
 
-    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 4px;">
+    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 3px;">
       <button onclick="cancelTransaction()" style="background-color: #e53935; color: white;">Cancel</button>
       <button onclick="submitTransaction()">Save</button>
     </div>
   </div>
 
   <script>
-    function showMessageAndClose(message) {
-      const body = document.body;
-      body.innerHTML = `<p style="text-align:center; font-weight:bold; font-size:16px;">${message}</p>`;
-      setTimeout(() => google.script.host.close(), 1000);
-    }
+    const requiredFields = [
+      { id: "symbol", label: "Symbol" },
+      { id: "strikePrice", label: "Strike Price" },
+      { id: "putCall", label: "Type (Put/Call)" },
+      { id: "expiration", label: "Expiration Date" },
+      { id: "buyDate", label: "Buy Date" },
+      { id: "buyPrice", label: "Buy Price" }
+    ];
 
     function submitTransaction() {
+      const missingFields = getMissingFields(requiredFields);
+      if (missingFields.length > 0) {
+        alert("Please fill out the following field(s): " + missingFields.join(", "));
+        return;
+      }
+
       const symbol = document.getElementById("symbol").value;
       const strikePrice = document.getElementById("strikePrice").value;
       const putCall = document.getElementById("putCall").value;
@@ -61,11 +72,6 @@
       const buyPrice = document.getElementById("buyPrice").value;
       const sellDate = document.getElementById("sellDate").value;
       const sellPrice = document.getElementById("sellPrice").value;
-
-      if (!symbol || !strikePrice || !putCall || !expiration || !buyDate || !buyPrice) {
-        alert("All required fields must be filled.");
-        return;
-      }
 
       google.script.run
         .withSuccessHandler(() => showMessageAndClose("✅ Transaction Saved"))
